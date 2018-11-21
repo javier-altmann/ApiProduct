@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using DAL;
 using DAL.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Services
 {
@@ -28,13 +29,13 @@ namespace Core.Services
 
         public async Task<ChildrenProducts> GetAsync(int productId)
         {
-             var product = await FindByConditionAync(x => x.Id.Equals(productId)); 
+            var product = await FindByConditionAync(x => x.Id.Equals(productId)); 
             return null;
         }
 
         public async Task<IEnumerable<ChildrenProducts>> GetAllAsync()
         {
-            var products = context.ChildrenProducts.ToList();
+            var products = await context.ChildrenProducts.ToListAsync();
             return products;
         }
     }

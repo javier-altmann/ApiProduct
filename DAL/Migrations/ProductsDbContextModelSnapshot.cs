@@ -24,8 +24,6 @@ namespace DAL.Migrations
 
                     b.Property<int?>("ColorId");
 
-                    b.Property<int?>("EgresosId");
-
                     b.Property<int?>("ProductId");
 
                     b.Property<int?>("SizeId");
@@ -33,8 +31,6 @@ namespace DAL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ColorId");
-
-                    b.HasIndex("EgresosId");
 
                     b.HasIndex("ProductId");
 
@@ -62,13 +58,35 @@ namespace DAL.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("ChildrenProductId");
+
                     b.Property<string>("Description");
 
                     b.Property<int>("Quantity");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ChildrenProductId");
+
                     b.ToTable("Egresos");
+                });
+
+            modelBuilder.Entity("DAL.Model.Ingresos", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int?>("ChildrenProductId");
+
+                    b.Property<string>("Description");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChildrenProductId");
+
+                    b.ToTable("Ingresos");
                 });
 
             modelBuilder.Entity("DAL.Model.Products", b =>
@@ -103,10 +121,6 @@ namespace DAL.Migrations
                         .WithMany()
                         .HasForeignKey("ColorId");
 
-                    b.HasOne("DAL.Model.Egresos")
-                        .WithMany("ChildrenProducts")
-                        .HasForeignKey("EgresosId");
-
                     b.HasOne("DAL.Model.Products", "Product")
                         .WithMany("ChildrenProduct")
                         .HasForeignKey("ProductId");
@@ -114,6 +128,20 @@ namespace DAL.Migrations
                     b.HasOne("DAL.Model.Sizes", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId");
+                });
+
+            modelBuilder.Entity("DAL.Model.Egresos", b =>
+                {
+                    b.HasOne("DAL.Model.ChildrenProducts", "ChildrenProduct")
+                        .WithMany()
+                        .HasForeignKey("ChildrenProductId");
+                });
+
+            modelBuilder.Entity("DAL.Model.Ingresos", b =>
+                {
+                    b.HasOne("DAL.Model.ChildrenProducts", "ChildrenProduct")
+                        .WithMany()
+                        .HasForeignKey("ChildrenProductId");
                 });
 #pragma warning restore 612, 618
         }

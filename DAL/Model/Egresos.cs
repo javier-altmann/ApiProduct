@@ -2,10 +2,11 @@ using System.Collections.Generic;
 
 namespace DAL.Model
 {
-    public class Egresos : BaseEntity 
+    public class Egresos : BaseEntity
     {
-        public virtual IList<ChildrenProducts> ChildrenProducts { get; set; }        
         public string Description { get; set; }
-        public int Quantity { get; set; } 
+        public int Quantity { get; set; }
+        public virtual ChildrenProducts ChildrenProduct { get; set; } 
+        
     }
 }

@@ -22,20 +22,6 @@ namespace DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Egresos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(nullable: true),
-                    Quantity = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Egresos", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Products",
                 columns: table => new
                 {
@@ -70,8 +56,7 @@ namespace DAL.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ColorId = table.Column<int>(nullable: true),
                     ProductId = table.Column<int>(nullable: true),
-                    SizeId = table.Column<int>(nullable: true),
-                    EgresosId = table.Column<int>(nullable: true)
+                    SizeId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -80,12 +65,6 @@ namespace DAL.Migrations
                         name: "FK_ChildrenProducts_Colors_ColorId",
                         column: x => x.ColorId,
                         principalTable: "Colors",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_ChildrenProducts_Egresos_EgresosId",
-                        column: x => x.EgresosId,
-                        principalTable: "Egresos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -102,15 +81,52 @@ namespace DAL.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Egresos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    ChildrenProductId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Egresos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Egresos_ChildrenProducts_ChildrenProductId",
+                        column: x => x.ChildrenProductId,
+                        principalTable: "ChildrenProducts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Ingresos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Description = table.Column<string>(nullable: true),
+                    Quantity = table.Column<int>(nullable: false),
+                    ChildrenProductId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ingresos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Ingresos_ChildrenProducts_ChildrenProductId",
+                        column: x => x.ChildrenProductId,
+                        principalTable: "ChildrenProducts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_ChildrenProducts_ColorId",
                 table: "ChildrenProducts",
                 column: "ColorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ChildrenProducts_EgresosId",
-                table: "ChildrenProducts",
-                column: "EgresosId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChildrenProducts_ProductId",
@@ -121,18 +137,31 @@ namespace DAL.Migrations
                 name: "IX_ChildrenProducts_SizeId",
                 table: "ChildrenProducts",
                 column: "SizeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Egresos_ChildrenProductId",
+                table: "Egresos",
+                column: "ChildrenProductId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ingresos_ChildrenProductId",
+                table: "Ingresos",
+                column: "ChildrenProductId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "Egresos");
+
+            migrationBuilder.DropTable(
+                name: "Ingresos");
+
+            migrationBuilder.DropTable(
                 name: "ChildrenProducts");
 
             migrationBuilder.DropTable(
                 name: "Colors");
-
-            migrationBuilder.DropTable(
-                name: "Egresos");
 
             migrationBuilder.DropTable(
                 name: "Products");
