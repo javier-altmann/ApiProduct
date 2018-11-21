@@ -1,0 +1,12 @@
+/home/javier/ApiProduct/Core/bin/Debug/netcoreapp2.1/Core.deps.json
+/home/javier/ApiProduct/Core/bin/Debug/netcoreapp2.1/Core.dll
+/home/javier/ApiProduct/Core/bin/Debug/netcoreapp2.1/Core.pdb
+/home/javier/ApiProduct/Core/bin/Debug/netcoreapp2.1/DAL.dll
+/home/javier/ApiProduct/Core/bin/Debug/netcoreapp2.1/DAL.pdb
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.csprojAssemblyReference.cache
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.csproj.CoreCompileInputs.cache
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.AssemblyInfoInputs.cache
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.AssemblyInfo.cs
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.csproj.CopyComplete
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.dll
+/home/javier/ApiProduct/Core/obj/Debug/netcoreapp2.1/Core.pdb

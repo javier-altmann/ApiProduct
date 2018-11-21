@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -11,11 +12,18 @@ namespace Api.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        private IProductService product;
+        public ProductController(IProductService product)
+        {
+            this.product = product;
+        }
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public async Task<IActionResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            var product = await this.product.GetAllAsync();
+            return Ok(product);
+            //return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
