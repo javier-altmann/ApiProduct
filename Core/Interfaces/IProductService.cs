@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Core.DTO;
 using DAL.Model;
 
 namespace Core.Interfaces
@@ -9,6 +10,7 @@ namespace Core.Interfaces
         Task<IEnumerable<ChildrenProducts>> GetAllAsync();
         Task<ChildrenProducts> GetAsync(int productId);
         Task CreateAsync(ChildrenProducts product);
-        Task DeleteAsync(ChildrenProducts product); 
+        Task DeleteAsync(ChildrenProducts product);
+        List<Test> List(); 
     }
 }

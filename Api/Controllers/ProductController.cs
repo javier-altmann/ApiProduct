@@ -19,9 +19,10 @@ namespace Api.Controllers
         }
         // GET api/values
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public ActionResult Get()
         {
-            var product = await this.product.GetAllAsync();
+            var product = this.product.List();
+            //var product = await this.product.GetAllAsync();
             return Ok(product);
             //return new string[] { "value1", "value2" };
         }
