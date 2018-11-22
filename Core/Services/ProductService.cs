@@ -35,20 +35,22 @@ namespace Core.Services {
             return products;
         }
 
-        public List<Test> List () {
-    
-            var simple = context.ChildrenProducts.Select(y => new Simple{
-                ColorCode  = y.Color.Code,
-                SizeCode = y.Size.Code
-            }).ToList();
+        public List<Product> List () {
 
-            var testing = context.Products
-                .Include (x => x.ChildrenProduct)
-                .Select (x => new Test {
-                    Code = x.Code,
-                    Simple = simple
-                }).ToList();
-            return testing;
+            var products = context.Products
+                .Include (p => p.ChildrenProduct)
+                .ThenInclude (cp => cp.Color)
+                .Include (p => p.ChildrenProduct)
+                .ThenInclude (cp => cp.Size)
+                .Select (p => new Product {
+                    Code = p.Code,
+                        Simple = p.ChildrenProduct.Select (cp => new Simple {
+                            ColorCode = cp.Color.Code,
+                                SizeCode = cp.Size.Code
+                        })
+                }).ToList ();
+
+            return products;
         }
     }
 

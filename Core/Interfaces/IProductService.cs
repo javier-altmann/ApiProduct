@@ -11,6 +11,6 @@ namespace Core.Interfaces
         Task<ChildrenProducts> GetAsync(int productId);
         Task CreateAsync(ChildrenProducts product);
         Task DeleteAsync(ChildrenProducts product);
-        List<Test> List(); 
+        List<Product> List(); 
     }
 }
